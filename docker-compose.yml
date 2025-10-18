@@ -1,0 +1,24 @@
+# docker-compose.yml (Modern, no version key)
+services:
+  angat-buhat-db:
+    image: postgres
+    environment:
+      # The official postgres image uses these variable names
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+    ports:
+      - "5433:5432"
+    networks:
+      - internal
+    volumes:
+      - type: bind
+        target: /home/kyuubi/Projects/tools/db2
+        source: /var/lib/postgresql/data2
+
+volumes:
+  angat_buhat_data:
+
+networks:
+  internal:
+    driver: bridge
